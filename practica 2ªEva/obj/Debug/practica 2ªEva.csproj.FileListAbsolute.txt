@@ -1,0 +1,6 @@
+C:\Users\1DAW\Documents\J.DAW\Programacion\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\bin\Debug\practica 2ªEva.exe.config
+C:\Users\1DAW\Documents\J.DAW\Programacion\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\bin\Debug\practica 2ªEva.exe
+C:\Users\1DAW\Documents\J.DAW\Programacion\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\bin\Debug\practica 2ªEva.pdb
+C:\Users\1DAW\Documents\J.DAW\Programacion\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\obj\Debug\practica 2ªEva.csprojResolveAssemblyReference.cache
+C:\Users\1DAW\Documents\J.DAW\Programacion\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\obj\Debug\practica 2ªEva.exe
+C:\Users\1DAW\Documents\J.DAW\Programacion\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\obj\Debug\practica 2ªEva.pdb
