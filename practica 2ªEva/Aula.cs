@@ -16,25 +16,48 @@ namespace practica_2ªEva
     /*.02 - Creacion de los metodos nombreaula, leeraula*/
     class Aula
     {
-        private int ID;
+        private uint ID;
         private string nombreaula;
-        public void VerAulas()
+        private DateTime modificaaula;
+       
+        public void LeerAulas(uint id, string NOM, DateTime modiaula)
         {
-            Console.WriteLine(@" == Listado de Aulas ==
-            Id.     Nombre      Nº Ordenadores      Fecha y hora modificación
-            ===     =======     ==============      ===========================
-
-            {0}     {1}               {2}                       {3}
-
-            ===================================================================
-            Nº Aulas: {4}
-            Nº Ordenadores: {5}", ID, nombreaula);
-
+            this.ID = id;
+            this.nombreaula = NOM;
+            this.modificaaula = modiaula;
         }
-        public void LeerAulas()
+        public uint Pid
         {
-            
+            get
+            {
+                return ID;
+            }
+            set
+            {
+                ID = value;
+            }
         }
-
+        public string PnomA
+        {
+            get
+            {
+                return nombreaula;
+            }
+            set
+            {
+                nombreaula = value;
+            }
+        }
+        public DateTime PmodA
+        {
+            get
+            {
+                return modificaaula;
+            }
+            set
+            {
+                modificaaula = value;
+            }
+        }
     }
 }

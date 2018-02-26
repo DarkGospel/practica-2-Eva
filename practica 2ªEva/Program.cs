@@ -23,8 +23,12 @@ namespace practica_2ªEva
         /// Se han creado atributos y metodos en la clase aula
         /// Se han añadido subfunciones a la funcion aula, son veraula, anyadiraula, borraraula.
         /// Se procederá a hacer funcionar la primera parte de aula con objetos.
-        /// 
         /// Empezamos github
+        /// 
+        /// Modificacion 26/02/2018
+        /// Rehacer parte de la ultima modifacion por borrado.
+        /// 
+        ///
         /// </summary>
         /*****************************************************************/
         static string n, respuesta;
@@ -99,8 +103,7 @@ namespace practica_2ªEva
                     anyadiraulas();
                     break;
                 case "3":
-                    /*busqueda()*/
-                    ;
+                    borraraula();
                     break;
                 case "4":
                     /*Listados()*/
@@ -117,43 +120,91 @@ namespace practica_2ªEva
         }
 
         /*Funciones aulas*/
+        static bool veriID(uint iden)
+        {
+            
+            for (int i=0; i<NumAulas.Count; i++) {
+                if (iden == NumAulas[i].Pid)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        static bool veriNom(string nom)
+        {
+            for(int i=0; i<NumAulas.Count; i++)
+            {
+                if(nom == NumAulas[i].PnomA)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         static void veraula()
         {
+            Console.WriteLine(@" == Listado de Aulas ==
+            Id.     Nombre      Nº Ordenadores      Fecha y hora modificación
+            ===     =======     ==============      ===========================");
+             for(int i=0; i<NumAulas.Count; i++)
+            {
+                Console.WriteLine("\t{0}\t{1}\t\t{2}", NumAulas[i].Pid, NumAulas[i].PnomA, NumAulas[i].PmodA );
+            }
+            Console.WriteLine("===================================================================");
+            Console.WriteLine("Nº Aulas: ");
+            Console.WriteLine("Nº Ordenadores: ");
+            Console.ReadLine();
 
         }
         static void anyadiraulas()
         {
-            int aula;
+            uint aula;
             string nomaula;
             DateTime modificacion;
-            do
-            {
+            for (int i=0; ;i++) {
+                Aula datoaula = new Aula();
                 Console.WriteLine(" === Añadir Aulas ===");
                 Console.Write("Identificador (0 ver lista de aulas): ");
-                aula = int.Parse(Console.ReadLine());
-                if(aula == 0)
+                aula = uint.Parse(Console.ReadLine());
+                if (aula == 0)
                 {
                     veraula();
                     break;
                 }
                 Console.Write("Nombre: ");
                 nomaula = Console.ReadLine();
+
+                if (veriID(aula) == false && veriNom(nomaula)== false)
+                {
+                    Console.WriteLine("¡Introducción de aula correcta!");
+                }
+                if(veriID(aula) == true && veriNom(nomaula)== true)
+                {
+                    Console.WriteLine("¡NOMBRE E IDENTIFICADOR REPETIDOS!");
+                }
                 modificacion = DateTime.Now;
+
+                datoaula.LeerAulas(aula, nomaula, modificacion);                
+                NumAulas.Add(datoaula);
 
                 Console.Write("¿más aulas(S/N)?: ");
                 respuesta = Console.ReadLine().ToUpper();
-                
-            } while (respuesta != "N");
+                if(respuesta == "N")
+                {
+                    break;
+                }
+            }
             aulas();
         }
         static void borraraula()
         {
             do
             {
-                int identificador;
+                uint identificador;
                 Console.WriteLine(" === Borrar Aulas ===");
                 Console.Write("Identificador (0 ver lista de aulas): ");
-                identificador = int.Parse(Console.ReadLine());
+                identificador = uint.Parse(Console.ReadLine());
                 if (identificador == 0)
                 {
                     veraula();
