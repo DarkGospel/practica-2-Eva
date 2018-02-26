@@ -23,6 +23,8 @@ namespace practica_2ªEva
         /// Se han creado atributos y metodos en la clase aula
         /// Se han añadido subfunciones a la funcion aula, son veraula, anyadiraula, borraraula.
         /// Se procederá a hacer funcionar la primera parte de aula con objetos.
+        /// 
+        /// Empezamos github
         /// </summary>
         /*****************************************************************/
         static string n, respuesta;
