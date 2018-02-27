@@ -15,6 +15,8 @@ namespace practica_2ªEva
         Versión: 0.02
         ***********************************/
         /// <summary>
+        /// MODIFICACIONES DE PROGRAM.CS
+        /// 
         /// En la modificación del 15/02/2018
         /// Se han creado los menús.
         /// El menú busqueda se tiene que hacer por iniciativa del alumno
@@ -26,9 +28,12 @@ namespace practica_2ªEva
         /// Empezamos github
         /// 
         /// Modificacion 26/02/2018
-        /// Rehacer parte de la ultima modifacion por borrado.
+        /// Rehacer parte de la ultima modifacion por borrado inesperado.
         /// 
-        ///
+        /// Modificacion 27/02/2018
+        /// Terminada la comprobacion de ID y Nombres de aula repetidos
+        /// Finalizada la funcion de borrar un aula
+        /// 
         /// </summary>
         /*****************************************************************/
         static string n, respuesta;
@@ -106,8 +111,7 @@ namespace practica_2ªEva
                     borraraula();
                     break;
                 case "4":
-                    /*Listados()*/
-                    ;
+                    modificaraula();
                     break;
                 case "0":
                     menu();
@@ -120,6 +124,8 @@ namespace practica_2ªEva
         }
 
         /*Funciones aulas*/
+
+        //Verificar si hay repetidos
         static bool veriID(uint iden)
         {
             
@@ -142,6 +148,8 @@ namespace practica_2ªEva
             }
             return false;
         }
+
+        //AULAS
         static void veraula()
         {
             Console.WriteLine(@" == Listado de Aulas ==
@@ -155,7 +163,6 @@ namespace practica_2ªEva
             Console.WriteLine("Nº Aulas: ");
             Console.WriteLine("Nº Ordenadores: ");
             Console.ReadLine();
-
         }
         static void anyadiraulas()
         {
@@ -163,6 +170,7 @@ namespace practica_2ªEva
             string nomaula;
             DateTime modificacion;
             for (int i=0; ;i++) {
+                Console.Clear();
                 Aula datoaula = new Aula();
                 Console.WriteLine(" === Añadir Aulas ===");
                 Console.Write("Identificador (0 ver lista de aulas): ");
@@ -170,21 +178,41 @@ namespace practica_2ªEva
                 if (aula == 0)
                 {
                     veraula();
-                    break;
                 }
                 Console.Write("Nombre: ");
                 nomaula = Console.ReadLine();
+                /*Comprobación de identificadores o aulas repetidas*/
+                //CORRECTA
+                    if (veriID(aula) == false && veriNom(nomaula)== false)
+                    {
+                        Console.WriteLine("¡Introducción de aula correcta!");
+                    }
+                //AMBAS REPETIDAS
+                    if(veriID(aula) == true && veriNom(nomaula)== true)
+                    {
+                        Console.WriteLine("¡NOMBRE E IDENTIFICADOR ERRONEOS!");
+                        Console.ReadLine();
+                        anyadiraulas();
+                    }
+                //ID REPETIDO
+                    if(veriID(aula) == true && veriNom(nomaula)== false)
+                    {
+                        Console.WriteLine("¡Identificador introducido ya existe!");
+                        Console.ReadLine();
+                        anyadiraulas();
+                    }
+                //NOMBRE DE AULA REPETIDO
+                    if(veriID(aula)==false && veriNom(nomaula)== true)
+                    {
+                        Console.WriteLine("¡El nombre introducido ya existe!");
+                        Console.ReadLine();
+                        anyadiraulas();
+                    }
 
-                if (veriID(aula) == false && veriNom(nomaula)== false)
-                {
-                    Console.WriteLine("¡Introducción de aula correcta!");
-                }
-                if(veriID(aula) == true && veriNom(nomaula)== true)
-                {
-                    Console.WriteLine("¡NOMBRE E IDENTIFICADOR REPETIDOS!");
-                }
+                //Continuamos con la funcion
                 modificacion = DateTime.Now;
 
+                //datos introducidos en lista y objeto
                 datoaula.LeerAulas(aula, nomaula, modificacion);                
                 NumAulas.Add(datoaula);
 
@@ -201,17 +229,32 @@ namespace practica_2ªEva
         {
             do
             {
+                Console.Clear();
                 uint identificador;
                 Console.WriteLine(" === Borrar Aulas ===");
+                Console.WriteLine("¿Quieres borrar un aula(S/N)?: ");
+                respuesta = Console.ReadLine().ToUpper();
+                if(respuesta == "N") { break; }
                 Console.Write("Identificador (0 ver lista de aulas): ");
                 identificador = uint.Parse(Console.ReadLine());
                 if (identificador == 0)
                 {
                     veraula();
                 }
-                Console.WriteLine("¿borrar más (S/N)?: ");
-                respuesta = Console.ReadLine().ToUpper();
+                for(int i=0; i < NumAulas.Count; i++)
+                {
+                    if(identificador == NumAulas[i].Pid)
+                    {
+                        NumAulas.RemoveAt(i);
+                    }
+                }
+                
             } while (respuesta != "N");
+            aulas();
+        }
+        static void modificaraula()
+        {
+
         }
 
         /*ordenadores*/
