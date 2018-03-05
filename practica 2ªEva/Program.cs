@@ -128,7 +128,6 @@ namespace practica_2ªEva
         //Verificar si hay repetidos
         static bool veriID(uint iden)
         {
-            
             for (int i=0; i<NumAulas.Count; i++) {
                 if (iden == NumAulas[i].Pid)
                 {
@@ -237,16 +236,24 @@ namespace practica_2ªEva
                 if(respuesta == "N") { break; }
                 Console.Write("Identificador (0 ver lista de aulas): ");
                 identificador = uint.Parse(Console.ReadLine());
-                for(int i=0; i < NumAulas.Count; i++)
+                if (identificador == 0)
                 {
-                    if (identificador == 0)
+                    veraula();
+                }
+                
+                for (int i=0; i < NumAulas.Count; i++)
+                {
+                    if (veriID(identificador) == false && identificador != 0)
                     {
-                        veraula();
-                    }
+                        Console.Write("¡El identificador no existe!");
+                        Console.ReadKey();
+                        borraraula();
+                    }else
                     if (identificador == NumAulas[i].Pid)
                     {
                         NumAulas.RemoveAt(i);
                     }
+                    
                     
                 }
                 
