@@ -237,16 +237,17 @@ namespace practica_2ªEva
                 if(respuesta == "N") { break; }
                 Console.Write("Identificador (0 ver lista de aulas): ");
                 identificador = uint.Parse(Console.ReadLine());
-                if (identificador == 0)
-                {
-                    veraula();
-                }
                 for(int i=0; i < NumAulas.Count; i++)
                 {
-                    if(identificador == NumAulas[i].Pid)
+                    if (identificador == 0)
+                    {
+                        veraula();
+                    }
+                    if (identificador == NumAulas[i].Pid)
                     {
                         NumAulas.RemoveAt(i);
                     }
+                    
                 }
                 
             } while (respuesta != "N");
@@ -254,7 +255,15 @@ namespace practica_2ªEva
         }
         static void modificaraula()
         {
-
+            /*Pasos para modificar una lista*/
+            /*
+             * Encontrar el objeto a modificar
+             *  --- Se puede encontrar por identificador
+             * Mostrar el objeto a modificar
+             *  --- El nombre 
+             * Actualizar la pila de almacenamiento con el nuevo objeto borrando el otro
+            */
+            
         }
 
         /*ordenadores*/
