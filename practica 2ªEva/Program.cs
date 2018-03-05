@@ -11,8 +11,8 @@ namespace practica_2ªEva
         /*********************************
         Autor: Juan Manuel Silva Cerrejón
         Fecha creación: 14/02/2018
-        Última modificación: 19/02/2018
-        Versión: 0.02
+        Última modificación: 05/03/2018
+        Versión: 0.52
         ***********************************/
         /// <summary>
         /// MODIFICACIONES DE PROGRAM.CS
@@ -34,6 +34,9 @@ namespace practica_2ªEva
         /// Terminada la comprobacion de ID y Nombres de aula repetidos
         /// Finalizada la funcion de borrar un aula
         /// 
+        /// Modificacion 05/03/2018
+        /// Terminada la parte de la funcion aulas.
+        /// Comienzo con el material de parte grafica.
         /// </summary>
         /*****************************************************************/
         static string n, respuesta;
@@ -60,8 +63,6 @@ namespace practica_2ªEva
 
                 Console.Write(" Elegir opción: ");
                 n = Console.ReadLine();
-            } while (n != "0" && n != "1" && n != "2" && n != "3" && n != "4" && n != "5");
-
             switch (n)
             {
                 case "1":
@@ -82,6 +83,7 @@ namespace practica_2ªEva
                 default:
                     break;
             }
+            } while (n != "0");
         }
 
         static void aulas()
@@ -98,7 +100,7 @@ namespace practica_2ªEva
 
                 Console.Write("Elegir opción: ");
                 n = Console.ReadLine();
-            } while(n != "0" && n != "1" && n != "2" && n != "3" && n != "4");
+            
             switch (n)
             {
                 case "1":
@@ -120,7 +122,7 @@ namespace practica_2ªEva
                     aulas();
                     break;
             }
-            
+            } while (n != "0" );
         }
 
         /*Funciones aulas*/
@@ -159,9 +161,10 @@ namespace practica_2ªEva
                 Console.WriteLine("\t{0}\t{1}\t\t{2}", NumAulas[i].Pid, NumAulas[i].PnomA, NumAulas[i].PmodA );
             }
             Console.WriteLine("===================================================================");
-            Console.WriteLine("Nº Aulas: ");
+            Console.WriteLine("Nº Aulas: {0}", NumAulas.Count);
             Console.WriteLine("Nº Ordenadores: ");
-            Console.ReadLine();
+            Console.ReadKey();
+            
         }
         static void anyadiraulas()
         {
@@ -222,7 +225,7 @@ namespace practica_2ªEva
                     break;
                 }
             }
-            aulas();
+            
         }
         static void borraraula()
         {
@@ -247,29 +250,54 @@ namespace practica_2ªEva
                     {
                         Console.Write("¡El identificador no existe!");
                         Console.ReadKey();
-                        borraraula();
+                        
                     }else
                     if (identificador == NumAulas[i].Pid)
                     {
                         NumAulas.RemoveAt(i);
                     }
-                    
-                    
                 }
                 
             } while (respuesta != "N");
-            aulas();
+            
         }
         static void modificaraula()
         {
-            /*Pasos para modificar una lista*/
-            /*
-             * Encontrar el objeto a modificar
-             *  --- Se puede encontrar por identificador
-             * Mostrar el objeto a modificar
-             *  --- El nombre 
-             * Actualizar la pila de almacenamiento con el nuevo objeto borrando el otro
-            */
+            do
+            {
+                Console.Clear();
+                DateTime modificador = DateTime.Now;
+                uint identificador;
+                string nuevaA;
+                Console.WriteLine(" === Modificar Aulas ===");
+                Console.WriteLine("¿Quieres modificar un aula(S/N)?: ");
+                respuesta = Console.ReadLine().ToUpper();
+                if (respuesta == "N") { break; }
+                Console.Write("Identificador (0 ver lista de aulas): ");
+                identificador = uint.Parse(Console.ReadLine());
+                if (identificador == 0)
+                {
+                    veraula();
+                }
+
+                for (int i = 0; i < NumAulas.Count; i++)
+                {
+                    if (veriID(identificador) == false && identificador != 0)
+                    {
+                        Console.Write("¡El identificador no existe!");
+                        Console.ReadKey();
+                        
+                    }else if(identificador == NumAulas[i].Pid)
+                    {
+                        Console.WriteLine("Nombre de aula antigua: {0}", NumAulas[i].PnomA);
+                        Console.Write("Nombre del aula nueva: ");
+                        nuevaA = Console.ReadLine();
+                        NumAulas[i].PnomA = nuevaA;
+                        NumAulas[i].PmodA = modificador;
+                    }
+                }
+
+            } while (respuesta != "N");
             
         }
 
