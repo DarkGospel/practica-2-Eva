@@ -42,6 +42,7 @@ namespace practica_2ªEva
         static string n, respuesta;
         static Aula datoaula = new Aula();
         public static List<Aula> NumAulas = new List<Aula>();
+        public static List<Ordenador> NumOrd = new List<Ordenador>();
         /*****************************************************************/
         static void Main()
         {
@@ -150,7 +151,7 @@ namespace practica_2ªEva
             return false;
         }
 
-        //AULAS
+        //AULAS("Terminada")
         static void veraula()
         {
             Console.WriteLine(@" == Listado de Aulas ==
@@ -301,7 +302,7 @@ namespace practica_2ªEva
             
         }
 
-        /*ordenadores*/
+        /*ORDENADORES*/
         static void ordenadores()
         {
             do
@@ -317,15 +318,13 @@ namespace practica_2ªEva
 
                 Console.Write(" Elegir opción: ");
                 n = Console.ReadLine();
-            } while (n != "0" && n != "1" && n != "2" && n != "3" && n != "4" && n != "5");
-
+            
             switch (n)
             {
                 case "1":
                     break;
                 case "2":
-                    /*ordenadores()*/
-                    ;
+                    addordenador();
                     break;
                 case "3":
                     /*busqueda()*/
@@ -342,8 +341,61 @@ namespace practica_2ªEva
                 default:
                     break;
             }
+            } while (n != "0");
         }
         /*Funciones ordenadores*/
+        static void addordenador()
+        {
+            uint ordenador, aula;
+            float ram;
+            DateTime modificacion;
+            for (int i = 0; ; i++)
+            {
+                Console.Clear();
+                
+                Console.WriteLine(" === Añadir Ordenador ===");
+                Console.Write("Identificador Ordenador (0 ver lista de ordeandores): PC");
+                ordenador = uint.Parse(Console.ReadLine());
+                if (ordenador == 0)
+                {
+                    
+                }
+                
+                /*Comprobación de identificadores repetidos*/
+                //CORRECTA
+                if (veriID(ordenador) == false)
+                {
+                    Console.WriteLine("¡Introducción de ID correcto!");
+                }
+                //REPETIDo
+                if (veriID(ordenador) == true)
+                {
+                    Console.WriteLine("¡IDENTIFICADOR ERRONEO!");
+                    Console.ReadLine();
+                    anyadiraulas();
+                }
+
+                Console.Write("Id. aula en la que se encuentra: ");
+                aula = uint.Parse(Console.ReadLine());
+                Console.WriteLine("Introduzca las caracteristicas del <PC{0}>", ordenador);
+                Console.Write("RAM: ");
+                ram = float.Parse(Console.ReadLine());
+
+                //Continuamos con la funcion
+                modificacion = DateTime.Now;
+
+                //datos introducidos en lista y objeto
+                NumOrd.Add(new Ordenador(ordenador, modificacion, aula));
+
+                Console.Write("¿más aulas(S/N)?: ");
+                respuesta = Console.ReadLine().ToUpper();
+                if (respuesta == "N")
+                {
+                    break;
+                }
+            }
+
+        }
 
 
         /*busquedas*/

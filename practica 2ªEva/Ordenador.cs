@@ -14,5 +14,22 @@ namespace practica_2ªEva
     ***********************************/
     class Ordenador
     {
+        private uint IDordenador;
+        private DateTime modificadorOrd;
+        private uint aulaasign;
+        private float ram;
+        private float hdd;
+        private string procesador;
+        private string tarjetagraf;
+        private string aplicaciones;
+        
+        public Ordenador(uint id, DateTime umod, uint aula)
+        {
+            this.IDordenador = id;
+            this.modificadorOrd = umod;
+            this.aulaasign = aula;
+
+        }
+
     }
 }

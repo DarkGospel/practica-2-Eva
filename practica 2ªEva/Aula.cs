@@ -28,6 +28,13 @@ namespace practica_2ªEva
             this.nombreaula = NOM;
             this.modificaaula = modiaula;
         }
+        public Aula() { } //constructor por defecto
+        public Aula(uint id, string nom, DateTime umod)
+        {
+            this.ID = id;
+            this.nombreaula = nom;
+            this.modificaaula = umod;
+        }
 
         // variables publicas de aula
         public uint Pid
