@@ -177,41 +177,44 @@ namespace practica_2ªEva
                 Aula datoaula = new Aula();
                 Console.WriteLine(" === Añadir Aulas ===");
                 Console.Write("Identificador (0 ver lista de aulas): ");
-                aula = uint.Parse(Console.ReadLine());
-                if (aula == 0)
-                {
-                    veraula();
-                }
-                Console.Write("Nombre: ");
-                nomaula = Console.ReadLine();
-                /*Comprobación de identificadores o aulas repetidas*/
-                //CORRECTA
-                    if (veriID(aula) == false && veriNom(nomaula)== false)
+               
+                    aula = uint.Parse(Console.ReadLine());
+                    if (aula == 0)
+                    {
+                        veraula();
+                        continue;
+                    }
+                    Console.Write("Nombre: ");
+                    nomaula = Console.ReadLine();
+                    /*Comprobación de identificadores o aulas repetidas*/
+                    //CORRECTA
+                    if (veriID(aula) == false && veriNom(nomaula) == false)
                     {
                         Console.WriteLine("¡Introducción de aula correcta!");
                     }
-                //AMBAS REPETIDAS
-                    if(veriID(aula) == true && veriNom(nomaula)== true)
+                    //AMBAS REPETIDAS
+                    if (veriID(aula) == true && veriNom(nomaula) == true)
                     {
                         Console.WriteLine("¡NOMBRE E IDENTIFICADOR ERRONEOS!");
                         Console.ReadLine();
                         anyadiraulas();
                     }
-                //ID REPETIDO
-                    if(veriID(aula) == true && veriNom(nomaula)== false)
+                    //ID REPETIDO
+                    if (veriID(aula) == true && veriNom(nomaula) == false)
                     {
                         Console.WriteLine("¡Identificador introducido ya existe!");
                         Console.ReadLine();
                         anyadiraulas();
                     }
-                //NOMBRE DE AULA REPETIDO
-                    if(veriID(aula)==false && veriNom(nomaula)== true)
+                    //NOMBRE DE AULA REPETIDO
+                    if (veriID(aula) == false && veriNom(nomaula) == true)
                     {
                         Console.WriteLine("¡El nombre introducido ya existe!");
                         Console.ReadLine();
                         anyadiraulas();
                     }
-
+                
+              
                 //Continuamos con la funcion
                 modificacion = DateTime.Now;
 
@@ -346,8 +349,9 @@ namespace practica_2ªEva
         /*Funciones ordenadores*/
         static void addordenador()
         {
-            uint ordenador, aula;
-            float ram;
+            uint aula;
+            string ordenador, procesador, grafica;
+            float ram, hdd;
             DateTime modificacion;
             for (int i = 0; ; i++)
             {
@@ -355,20 +359,22 @@ namespace practica_2ªEva
                 
                 Console.WriteLine(" === Añadir Ordenador ===");
                 Console.Write("Identificador Ordenador (0 ver lista de ordeandores): PC");
-                ordenador = uint.Parse(Console.ReadLine());
-                if (ordenador == 0)
+                ordenador = Console.ReadLine();
+                if (ordenador == "0")
                 {
                     
                 }
                 
                 /*Comprobación de identificadores repetidos*/
+
                 //CORRECTA
-                if (veriID(ordenador) == false)
+                if (veriNom(ordenador) == false)
                 {
                     Console.WriteLine("¡Introducción de ID correcto!");
                 }
+
                 //REPETIDo
-                if (veriID(ordenador) == true)
+                if (veriNom(ordenador) == true)
                 {
                     Console.WriteLine("¡IDENTIFICADOR ERRONEO!");
                     Console.ReadLine();
@@ -376,16 +382,28 @@ namespace practica_2ªEva
                 }
 
                 Console.Write("Id. aula en la que se encuentra: ");
-                aula = uint.Parse(Console.ReadLine());
-                Console.WriteLine("Introduzca las caracteristicas del <PC{0}>", ordenador);
+                aula = uint.Parse(Console.ReadLine());                                          //Identificador AULA
+
+                Console.WriteLine("Introduzca las caracteristicas del <{0}>", ordenador);
                 Console.Write("RAM: ");
                 ram = float.Parse(Console.ReadLine());
 
-                //Continuamos con la funcion
+                Console.Write("\nDisco duro: ");
+                hdd = float.Parse(Console.ReadLine());
+
+                Console.Write("\nProcesador: ");
+                procesador = Console.ReadLine();
+
+                Console.Write("\nTarjeta Gráfica: ");
+                grafica = Console.ReadLine();
+
+                /*Aplicaciones de ordenador (Buscar manera de guardar separados por ,)*/
+
+                //Modificación
                 modificacion = DateTime.Now;
 
                 //datos introducidos en lista y objeto
-                NumOrd.Add(new Ordenador(ordenador, modificacion, aula));
+                NumOrd.Add(new Ordenador(ordenador, modificacion, aula, ram, hdd, procesador, grafica));
 
                 Console.Write("¿más aulas(S/N)?: ");
                 respuesta = Console.ReadLine().ToUpper();
@@ -394,7 +412,6 @@ namespace practica_2ªEva
                     break;
                 }
             }
-
         }
 
 
