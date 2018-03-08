@@ -16,14 +16,24 @@ namespace practica_2ªEva
     {
         private string IDordenador;
         private DateTime modificadorOrd;
-        private uint aulaasign;
+        private int aulaasign;
         private float ram;
         private float hdd;
         private string procesador;
         private string tarjetagraf;
         private string aplicaciones;
         
-        public Ordenador(string id, DateTime umod, uint aula, float RAM, float disco, string cpu, string grafica)
+        /// <summary>
+        /// Constructor de ordenadores.
+        /// </summary>
+        /// <param name="id"> numero de pc</param>
+        /// <param name="umod"> ultima modificacion </param>
+        /// <param name="aula"> identificador del aula</param>
+        /// <param name="RAM"> ram guardada</param>
+        /// <param name="disco"> disco y tamaño</param>
+        /// <param name="cpu"> procesador </param>
+        /// <param name="grafica"> tarjeta grafica</param>
+        public Ordenador(string id, DateTime umod, int aula, float RAM, float disco, string cpu, string grafica, string apli)
         {
             this.IDordenador = id;
             this.modificadorOrd = umod;
@@ -32,7 +42,54 @@ namespace practica_2ªEva
             this.hdd = disco;
             this.procesador = cpu;
             this.tarjetagraf = grafica;
+            this.aplicaciones = apli;
         }
-
+        public Ordenador(string id, string cpu, float ram, string apli, DateTime modi, int aula)
+        {
+            /*este constructor es para usarlo en la funcion de aulas
+              para añadir automaticamente*/
+            this.IDordenador = id;
+            procesador = cpu;
+            this.ram = ram;
+            hdd = 500;
+            tarjetagraf = "Intel HD Graphics";
+            this.aplicaciones = apli;
+            this.modificadorOrd = modi;
+            this.aulaasign = aula;
+        }
+        
+        public string PidO
+        {
+            get
+            {
+                return IDordenador;
+            }
+            set
+            {
+                IDordenador = value;
+            }
+        }
+        public int PidA
+        {
+            get
+            {
+                return aulaasign;
+            }
+            set
+            {
+                aulaasign = value;
+            }
+        }
+        public DateTime UmodO
+        {
+            get
+            {
+                return modificadorOrd;
+            }
+            set
+            {
+                modificadorOrd = value;
+            }
+        }
     }
 }

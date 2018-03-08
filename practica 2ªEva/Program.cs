@@ -129,7 +129,7 @@ namespace practica_2ªEva
         /*Funciones aulas*/
 
         //Verificar si hay repetidos
-        static bool veriID(uint iden)
+        static bool veriID(int iden)
         {
             for (int i=0; i<NumAulas.Count; i++) {
                 if (iden == NumAulas[i].Pid)
@@ -159,7 +159,7 @@ namespace practica_2ªEva
             ===     =======     ==============      ===========================");
              for(int i=0; i<NumAulas.Count; i++)
             {
-                Console.WriteLine("\t{0}\t{1}\t\t{2}", NumAulas[i].Pid, NumAulas[i].PnomA, NumAulas[i].PmodA );
+                Console.WriteLine("\t{0}\t{1}\t\t{2}\t\t", NumAulas[i].Pid, NumAulas[i].PnomA, NumAulas[i].PmodA );
             }
             Console.WriteLine("===================================================================");
             Console.WriteLine("Nº Aulas: {0}", NumAulas.Count);
@@ -169,7 +169,7 @@ namespace practica_2ªEva
         }
         static void anyadiraulas()
         {
-            uint aula;
+            int aula;
             string nomaula;
             DateTime modificacion;
             for (int i=0; ;i++) {
@@ -178,7 +178,7 @@ namespace practica_2ªEva
                 Console.WriteLine(" === Añadir Aulas ===");
                 Console.Write("Identificador (0 ver lista de aulas): ");
                
-                    aula = uint.Parse(Console.ReadLine());
+                    aula = int.Parse(Console.ReadLine());
                     if (aula == 0)
                     {
                         veraula();
@@ -236,13 +236,13 @@ namespace practica_2ªEva
             do
             {
                 Console.Clear();
-                uint identificador;
+                int identificador;
                 Console.WriteLine(" === Borrar Aulas ===");
                 Console.WriteLine("¿Quieres borrar un aula(S/N)?: ");
                 respuesta = Console.ReadLine().ToUpper();
                 if(respuesta == "N") { break; }
                 Console.Write("Identificador (0 ver lista de aulas): ");
-                identificador = uint.Parse(Console.ReadLine());
+                identificador = int.Parse(Console.ReadLine());
                 if (identificador == 0)
                 {
                     veraula();
@@ -271,14 +271,14 @@ namespace practica_2ªEva
             {
                 Console.Clear();
                 DateTime modificador = DateTime.Now;
-                uint identificador;
+                int identificador;
                 string nuevaA;
                 Console.WriteLine(" === Modificar Aulas ===");
                 Console.WriteLine("¿Quieres modificar un aula(S/N)?: ");
                 respuesta = Console.ReadLine().ToUpper();
                 if (respuesta == "N") { break; }
                 Console.Write("Identificador (0 ver lista de aulas): ");
-                identificador = uint.Parse(Console.ReadLine());
+                identificador = int.Parse(Console.ReadLine());
                 if (identificador == 0)
                 {
                     veraula();
@@ -325,13 +325,13 @@ namespace practica_2ªEva
             switch (n)
             {
                 case "1":
+                    verordenador();
                     break;
                 case "2":
                     addordenador();
                     break;
                 case "3":
-                    /*busqueda()*/
-                    ;
+                    borrarordenador();
                     break;
                 case "4":
                     /*Listados()*/
@@ -347,10 +347,26 @@ namespace practica_2ªEva
             } while (n != "0");
         }
         /*Funciones ordenadores*/
+        static void verordenador()
+        {
+            Console.Clear();
+            Console.SetCursorPosition(10, 2);
+            Console.WriteLine("=== Lista de Ordenadores ===");
+            Console.SetCursorPosition(6, 4);
+            Console.WriteLine("Id.      Aula        F.Creación");
+            Console.WriteLine("========  =============  =====================");
+
+            for (int i = 0; i < NumOrd.Count; i++)
+            {
+                Console.WriteLine("{0}      {1}     {2}", NumOrd[i].PidO, NumOrd[i].PidA, NumOrd[i].UmodO);
+            }
+            Console.ReadKey();
+
+        }
         static void addordenador()
         {
-            uint aula;
-            string ordenador, procesador, grafica;
+            int aula;
+            string ordenador, procesador, grafica, aplicaciones;
             float ram, hdd;
             DateTime modificacion;
             for (int i = 0; ; i++)
@@ -358,11 +374,11 @@ namespace practica_2ªEva
                 Console.Clear();
                 
                 Console.WriteLine(" === Añadir Ordenador ===");
-                Console.Write("Identificador Ordenador (0 ver lista de ordeandores): PC");
+                Console.Write("Identificador Ordenador (0 ver lista de ordeandores): ");
                 ordenador = Console.ReadLine();
                 if (ordenador == "0")
                 {
-                    
+                    verordenador();
                 }
                 
                 /*Comprobación de identificadores repetidos*/
@@ -382,7 +398,7 @@ namespace practica_2ªEva
                 }
 
                 Console.Write("Id. aula en la que se encuentra: ");
-                aula = uint.Parse(Console.ReadLine());                                          //Identificador AULA
+                aula = int.Parse(Console.ReadLine());                                          //Identificador AULA
 
                 Console.WriteLine("Introduzca las caracteristicas del <{0}>", ordenador);
                 Console.Write("RAM: ");
@@ -398,14 +414,16 @@ namespace practica_2ªEva
                 grafica = Console.ReadLine();
 
                 /*Aplicaciones de ordenador (Buscar manera de guardar separados por ,)*/
+                Console.Write("\nAplicaciones: ");
+                aplicaciones = Console.ReadLine();
 
                 //Modificación
                 modificacion = DateTime.Now;
 
                 //datos introducidos en lista y objeto
-                NumOrd.Add(new Ordenador(ordenador, modificacion, aula, ram, hdd, procesador, grafica));
+                NumOrd.Add(new Ordenador(ordenador, modificacion, aula, ram, hdd, procesador, grafica, aplicaciones));
 
-                Console.Write("¿más aulas(S/N)?: ");
+                Console.Write("¿más ordenadores(S/N)?: ");
                 respuesta = Console.ReadLine().ToUpper();
                 if (respuesta == "N")
                 {
@@ -413,7 +431,39 @@ namespace practica_2ªEva
                 }
             }
         }
+        static void borrarordenador()
+        {
+            do
+            {
+                Console.Clear();
+                string identificador;
+                Console.WriteLine(" === Borrar Ordenador ===");
+                Console.WriteLine("¿Quieres borrar un ordenador(S/N)?: ");
+                respuesta = Console.ReadLine().ToUpper();
+                if (respuesta == "N") { break; }
+                Console.Write("Identificador (0 ver lista de aulas): ");
+                identificador = Console.ReadLine();
+                if (identificador == "0")
+                {
+                    verordenador();
+                }
 
+                for (int i = 0; i < NumOrd.Count; i++)
+                {
+                    if (veriNom(identificador) == false && identificador != "0")
+                    {
+                        Console.Write("¡El identificador no existe!");
+                        Console.ReadKey();
+                    }
+                    else
+                    if (identificador == NumOrd[i].PidO)
+                    {
+                        NumOrd.RemoveAt(i);
+                    }
+                }
+
+            } while (respuesta != "N");
+        }
 
         /*busquedas*/
         static void busquedas(){ }
@@ -479,20 +529,35 @@ namespace practica_2ªEva
             switch (n)
             {
                 case "1":
-                    aulas();
+                    
                     break;
                 case "2":
-                    /*ordenadores()*/
-                    ;
+                    
                     break;
                 case "3":
-                    /*busqueda()*/
-                    ;
+                    pruebas();
                     break;
                 default:
                     break;
             }
         }
         /*Funciones configuracion*/
+        static void pruebas()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                NumAulas.Add(new Aula(i + 1, $"Aula {i + 1}", DateTime.Now));
+            }
+                NumAulas[0].agregarpc("PC01", "Intel i5", 8, "W7, Office 2010, Chrome");
+                NumAulas[1].agregarpc("PC02", "Intel i5", 8, "W7, Office 2010, Chrome");
+                NumAulas[3].agregarpc("PC03", "Intel i5", 8, "W7, Office 2010, Chrome");
+                NumAulas[4].agregarpc("PC04", "Intel i5", 8, "W7, Office 2010, Chrome");
+                NumAulas[2].agregarpc("PC05", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
+                NumAulas[2].agregarpc("PC05", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
+                NumAulas[2].agregarpc("PC06", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
+                NumAulas[2].agregarpc("PC07", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
+                NumAulas[2].agregarpc("PC08", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
+            
+        }
     }
 }
