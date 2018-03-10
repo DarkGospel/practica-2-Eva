@@ -20,7 +20,7 @@ namespace practica_2ªEva
         private int ID;
         private string nombreaula;
         private DateTime modificaaula;
-        List<Ordenador> PCs;
+        List<Ordenador> NumOrd;
         //metodo para introducir datos en aula
         public void LeerAulas(int id, string NOM, DateTime modiaula)
         {
@@ -34,11 +34,11 @@ namespace practica_2ªEva
             this.ID = id;
             this.nombreaula = nom;
             this.modificaaula = umod;
-            PCs = new List<Ordenador>();
+            NumOrd = new List<Ordenador>();
         }
         public void agregarpc(string id, string cpu, float ram, string apli)
         {
-            PCs.Add(new Ordenador(id, cpu, ram, apli, DateTime.Now, this.ID));
+            NumOrd.Add(new Ordenador(id, cpu, ram, apli, DateTime.Now, this.ID));
         }
         // variables publicas de aula
         public int Pid

@@ -163,9 +163,8 @@ namespace practica_2ªEva
             }
             Console.WriteLine("===================================================================");
             Console.WriteLine("Nº Aulas: {0}", NumAulas.Count);
-            Console.WriteLine("Nº Ordenadores: ");
+            Console.WriteLine("Nº Ordenadores: {0}", NumOrd.Count);
             Console.ReadKey();
-            
         }
         static void anyadiraulas()
         {
@@ -340,6 +339,9 @@ namespace practica_2ªEva
                 case "5":
                     /*Configuración()*/
                     ;
+                    break;
+                case "0":
+                    menu();
                     break;
                 default:
                     break;
@@ -524,7 +526,7 @@ namespace practica_2ªEva
 
                 Console.Write(" Elegir opción: ");
                 n = Console.ReadLine();
-            } while (n != "0" && n != "1" && n != "2" && n != "3");
+            
 
             switch (n)
             {
@@ -537,9 +539,13 @@ namespace practica_2ªEva
                 case "3":
                     pruebas();
                     break;
+                case "0":
+                    menu();
+                    break;
                 default:
                     break;
             }
+            } while (n != "0");
         }
         /*Funciones configuracion*/
         static void pruebas()
