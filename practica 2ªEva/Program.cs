@@ -240,7 +240,7 @@ namespace practica_2ªEva
             }
             
         }
-        static void borraraula()
+        static void borraraula()//falta modificar
         {
             do
             {
@@ -343,8 +343,7 @@ namespace practica_2ªEva
                     borrarordenador();
                     break;
                 case "4":
-                    /*Listados()*/
-                    ;
+                    cambiarUO();
                     break;
                 case "5":
                     /*Configuración()*/
@@ -443,7 +442,7 @@ namespace practica_2ªEva
                 }
             }
         }
-        static void borrarordenador()
+        static void borrarordenador()//falta modificar
         {
             do
             {
@@ -453,7 +452,7 @@ namespace practica_2ªEva
                 Console.WriteLine("¿Quieres borrar un ordenador(S/N)?: ");
                 respuesta = Console.ReadLine().ToUpper();
                 if (respuesta == "N") { break; }
-                Console.Write("Identificador (0 ver lista de aulas): ");
+                Console.Write("Identificador (0 ver lista de ordenadores): ");
                 identificador = Console.ReadLine();
                 if (identificador == "0")
                 {
@@ -474,6 +473,53 @@ namespace practica_2ªEva
                     }
                 }
 
+            } while (respuesta != "N");
+        }
+        static void cambiarUO()
+        {
+            do
+            {
+                string identificador;
+                int idaula;
+                Console.WriteLine(" === Cambiar Ubicacion Ordenador ===");
+                Console.Write("Identificador (0 ver lista de ordenadores): ");
+                identificador = Console.ReadLine();
+                if (identificador == "0")
+                {
+                    verordenador();
+                }
+
+                for (int i = 0; i < NumOrd.Count; i++)
+                {
+                    if (identificador == NumOrd[i].PidO)
+                    {
+                        string cont = "0";
+                        
+                        for (int u = 0; u < NumAulas.Count; u++) {
+                            if(NumOrd[i].PidA == NumAulas[u].Pid)
+                            {
+                                cont = NumAulas[u].PnomA;
+                                Console.WriteLine("Seleccionado {0} situado en <{1}>", NumOrd[i].PidO, cont);
+                            }
+                            
+                        }
+                        
+                        Console.Write("Seleccione nueva ubicación (0 lista aulas): ");
+                        idaula = int.Parse(Console.ReadLine());
+                        if (idaula == 0)
+                        {
+                            veraula();
+                        }
+                        if (veriID(idaula) == false && idaula != 0)
+                        {
+                            Console.Write("¡El aula no existe!");
+                            Console.ReadKey();
+                        }
+                        }
+                }
+                Console.Write("¿Mover más (S/N)? ");
+                respuesta = Console.ReadLine().ToUpper();
+                if (respuesta == "N") { break; }
             } while (respuesta != "N");
         }
 
