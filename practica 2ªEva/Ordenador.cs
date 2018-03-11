@@ -44,19 +44,7 @@ namespace practica_2ªEva
             this.tarjetagraf = grafica;
             this.aplicaciones = apli;
         }
-        public Ordenador(string id, string cpu, float ram, string apli, DateTime modi, int aula)
-        {
-            /*este constructor es para usarlo en la funcion de aulas
-              para añadir automaticamente*/
-            this.IDordenador = id;
-            procesador = cpu;
-            this.ram = ram;
-            hdd = 500;
-            tarjetagraf = "Intel HD Graphics";
-            this.aplicaciones = apli;
-            this.modificadorOrd = modi;
-            this.aulaasign = aula;
-        }
+       
         
         public string PidO
         {

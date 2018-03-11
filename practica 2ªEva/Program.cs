@@ -154,15 +154,25 @@ namespace practica_2ªEva
         //AULAS("Terminada")
         static void veraula()
         {
-            Console.WriteLine(@" == Listado de Aulas ==
-            Id.     Nombre      Nº Ordenadores      Fecha y hora modificación
-            ===     =======     ==============      ===========================");
+            Console.Clear();
+            Console.WriteLine(@"                                == Listado de Aulas ==
+            
+            Id.         Nombre      Nº Ordenadores      Fecha y hora modificación
+            ===         =======     ==============      ==========================");
              for(int i=0; i<NumAulas.Count; i++)
             {
-                Console.WriteLine("\t{0}\t{1}\t\t{2}\t\t", NumAulas[i].Pid, NumAulas[i].PnomA, NumAulas[i].PmodA );
+                int cont = 0;
+                for (int u=0; u<NumOrd.Count; u++)
+                {
+                    if (NumOrd[u].PidA == NumAulas[i].Pid)
+                    {
+                        cont++;
+                    }
+                }
+                Console.WriteLine("\t      {0} \t{1}\t\t{2}\t\t{3}", NumAulas[i].Pid, NumAulas[i].PnomA, cont, NumAulas[i].PmodA );
             }
-            Console.WriteLine("===================================================================");
-            Console.WriteLine("Nº Aulas: {0}", NumAulas.Count);
+            Console.WriteLine("\t   =======================================================================");
+            Console.WriteLine("\nNº Aulas: {0}", NumAulas.Count);
             Console.WriteLine("Nº Ordenadores: {0}", NumOrd.Count);
             Console.ReadKey();
         }
@@ -360,7 +370,7 @@ namespace practica_2ªEva
 
             for (int i = 0; i < NumOrd.Count; i++)
             {
-                Console.WriteLine("{0}      {1}     {2}", NumOrd[i].PidO, NumOrd[i].PidA, NumOrd[i].UmodO);
+                Console.WriteLine("{0}      \t{1}     \t  {2}", NumOrd[i].PidO, NumOrd[i].PidA, NumOrd[i].UmodO);
             }
             Console.ReadKey();
 
@@ -554,16 +564,26 @@ namespace practica_2ªEva
             {
                 NumAulas.Add(new Aula(i + 1, $"Aula {i + 1}", DateTime.Now));
             }
-                NumAulas[0].agregarpc("PC01", "Intel i5", 8, "W7, Office 2010, Chrome");
-                NumAulas[1].agregarpc("PC02", "Intel i5", 8, "W7, Office 2010, Chrome");
-                NumAulas[3].agregarpc("PC03", "Intel i5", 8, "W7, Office 2010, Chrome");
-                NumAulas[4].agregarpc("PC04", "Intel i5", 8, "W7, Office 2010, Chrome");
-                NumAulas[2].agregarpc("PC05", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
-                NumAulas[2].agregarpc("PC05", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
-                NumAulas[2].agregarpc("PC06", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
-                NumAulas[2].agregarpc("PC07", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
-                NumAulas[2].agregarpc("PC08", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
-            
+                NumOrd.Add(new Ordenador ( "PC 01", DateTime.Now, 1, 8, 500, "intel core i5", "Intel Graphics", "W7, Office 2010, Chrome"));
+                NumOrd.Add(new Ordenador("PC 02", DateTime.Now, 2, 8, 500, "intel core i5", "Intel Graphics", "W7, Office 2010, Chrome"));
+                NumOrd.Add(new Ordenador("PC 03", DateTime.Now, 4, 8, 500, "intel core i5", "Intel Graphics", "W7, Office 2010, Chrome"));
+                NumOrd.Add(new Ordenador("PC 04", DateTime.Now, 5, 8, 500, "intel core i5", "Intel Graphics", "W7, Office 2010, Chrome"));
+                NumOrd.Add(new Ordenador("PC 05", DateTime.Now, 3, 4, 500, "intel celeron", "Intel Graphics", "Ubuntu 14, Gedit, LibreOffice 5"));
+                NumOrd.Add(new Ordenador("PC 06", DateTime.Now, 3, 4, 500, "intel celeron", "Intel Graphics", "Ubuntu 14, Gedit, LibreOffice 5"));
+                NumOrd.Add(new Ordenador("PC 07", DateTime.Now, 3, 4, 500, "intel celeron", "Intel Graphics", "Ubuntu 14, Gedit, LibreOffice 5"));
+                NumOrd.Add(new Ordenador("PC 08", DateTime.Now, 3, 4, 500, "intel celeron", "Intel Graphics", "Ubuntu 14, Gedit, LibreOffice 5"));
+
+            /*NumAulas[1].agregarpc("PC02", "Intel i5", 8, "W7, Office 2010, Chrome");
+            NumAulas[3].agregarpc("PC03", "Intel i5", 8, "W7, Office 2010, Chrome");
+            NumAulas[4].agregarpc("PC04", "Intel i5", 8, "W7, Office 2010, Chrome");
+            NumAulas[2].agregarpc("PC05", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
+            NumAulas[2].agregarpc("PC05", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
+            NumAulas[2].agregarpc("PC06", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
+            NumAulas[2].agregarpc("PC07", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
+            NumAulas[2].agregarpc("PC08", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");*/
+
+
+
         }
     }
 }
