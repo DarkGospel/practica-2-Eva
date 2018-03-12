@@ -240,7 +240,7 @@ namespace practica_2ªEva
             }
             
         }
-        static void borraraula()//falta modificar
+        static void borraraula()//falta ver numero de ordenadores a borrar.
         {
             do
             {
@@ -259,30 +259,41 @@ namespace practica_2ªEva
                     Console.Write("¡El identificador no existe!");
                     Console.ReadKey();
                 }
-
-                for (int i=0; i < NumAulas.Count; i++)
+                int cont = 0;
+                for (int i = 0; i <NumAulas.Count; i++)
                 {
-                    for (int u = 0; u < NumOrd.Count; u++)
+                    for (int u = 0; u <NumOrd.Count; u++)
                     {
+                        if (NumOrd[u].PidA == NumAulas[i].Pid)
+                        {
+                            cont++;
+                        }
                         if (identificador == NumAulas[i].Pid)
                         {
+                            
                             string respuesta2;
                             Console.WriteLine("Se procedera a borrar el aula: {0}", NumAulas[i].PnomA);
+                            Console.WriteLine("Esta aula tiene {0} ordenadores que serán también eliminados.", cont);
                             Console.WriteLine("¿desea continuar borrando el aula (S/N)?  ");
                             respuesta2 = Console.ReadLine().ToUpper();
                             if (respuesta2 == "S")
                             {
                                 Console.WriteLine(".........{0} borrada", NumAulas[i].PnomA);
                                 NumAulas.RemoveAt(i);
+                                NumOrd.RemoveAt(u);
+                                Console.ReadKey();
+                                break;
                             }
                             else
                             {
                                 Console.WriteLine(".............. No se ha borrado el aula");
+                                Console.ReadKey();
+                                break;
                             }
                         }
-                    }
                 }
-                Console.WriteLine("¿Quieres borrar un aula(S/N)?: ");
+                }
+                Console.WriteLine("¿Quieres borrar mas aula(S/N)?: ");
                 respuesta = Console.ReadLine().ToUpper();
                 if (respuesta == "N") { break; }
 
@@ -372,6 +383,18 @@ namespace practica_2ªEva
             } while (n != "0");
         }
         /*Funciones ordenadores*/
+        static bool veriNom2(string nom)
+        {
+            for (int i = 0; i < NumOrd.Count; i++)
+            {
+                if (nom == NumOrd[i].PidO)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         static void verordenador()
         {
             Console.Clear();
@@ -456,7 +479,7 @@ namespace practica_2ªEva
                 }
             }
         }
-        static void borrarordenador()//falta modificar
+        static void borrarordenador()
         {
             do
             {
@@ -467,23 +490,44 @@ namespace practica_2ªEva
                 respuesta = Console.ReadLine().ToUpper();
                 if (respuesta == "N") { break; }
                 Console.Write("Identificador (0 ver lista de ordenadores): ");
-                identificador = Console.ReadLine();
+                identificador = Console.ReadLine().ToUpper();
                 if (identificador == "0")
                 {
                     verordenador();
                 }
-
-                for (int i = 0; i < NumOrd.Count; i++)
+                if (veriNom2(identificador) == false && identificador != "0")
                 {
-                    if (veriNom(identificador) == false && identificador != "0")
-                    {
-                        Console.Write("¡El identificador no existe!");
-                        Console.ReadKey();
-                    }
-                    else
+                    Console.Write("¡El identificador no existe!");
+                    Console.ReadKey();
+                }
+                for (int i = 0; i < NumOrd.Count; i++)
+                {                   
                     if (identificador == NumOrd[i].PidO)
                     {
-                        NumOrd.RemoveAt(i);
+                        string respuesta2;
+                        
+                        for (int u = 0; u < NumAulas.Count; u++)
+                        {
+                            if (NumOrd[i].PidA == NumAulas[u].Pid)
+                            {
+                                Console.WriteLine("Se procedera a borrar el ordenador <{0}> situado en el <{1}>", NumOrd[i].PidO, NumAulas[u].PnomA);
+                                Console.WriteLine("¿desea continuar borrando el ordenador (S/N)?  ");
+                                respuesta2 = Console.ReadLine().ToUpper();
+                                if (respuesta2 == "S")
+                                {
+                                    Console.WriteLine(".........{0} borrado correctamente", NumOrd[i].PidO);
+                                    NumOrd.RemoveAt(i);
+                                    Console.ReadKey();
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine(".............. No se ha borrado el ordenador");
+                                    Console.ReadKey();
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -542,7 +586,10 @@ namespace practica_2ªEva
                 if (respuesta == "N") { break; }
             } while (respuesta != "N");
         }
-        static void modificarO() { }
+        static void modificarO()
+        {
+
+        }
 
         /*busquedas*/
         static void busquedas(){ }
@@ -619,6 +666,7 @@ namespace practica_2ªEva
         /*Funciones configuracion*/
         static void pruebas()
         {
+            Console.Clear();
             for (int i = 0; i < 5; i++)
             {
                 NumAulas.Add(new Aula(i + 1, $"Aula {i + 1}", DateTime.Now));
