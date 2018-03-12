@@ -240,8 +240,9 @@ namespace practica_2ªEva
             }
             
         }
-        static void borraraula()//falta ver numero de ordenadores a borrar.
+        static void borraraula()
         {
+            int cont = 0;
             do
             {
                 Console.Clear();
@@ -259,18 +260,19 @@ namespace practica_2ªEva
                     Console.Write("¡El identificador no existe!");
                     Console.ReadKey();
                 }
-                int cont = 0;
+                for (int u = 0; u < NumOrd.Count; u++)
+                {
+                    if(identificador== NumOrd[u].PidA)
+                    {
+                        cont++;
+                    }
+                }
                 for (int i = 0; i <NumAulas.Count; i++)
                 {
                     for (int u = 0; u <NumOrd.Count; u++)
                     {
-                        if (NumOrd[u].PidA == NumAulas[i].Pid)
-                        {
-                            cont++;
-                        }
                         if (identificador == NumAulas[i].Pid)
                         {
-                            
                             string respuesta2;
                             Console.WriteLine("Se procedera a borrar el aula: {0}", NumAulas[i].PnomA);
                             Console.WriteLine("Esta aula tiene {0} ordenadores que serán también eliminados.", cont);
@@ -588,6 +590,18 @@ namespace practica_2ªEva
         }
         static void modificarO()
         {
+            Console.WriteLine("====== MODIFICAR ORDENADOR =======");
+            Console.WriteLine("Identificador de ordenador (0 ver lista ordenadores): ");
+            Console.WriteLine("¿Desea modificar su identificador (S/N)? ");
+            Console.WriteLine("El ordenador se encuentra en el aula con ID <{0}>");
+            Console.WriteLine("Modifique las características  del <{0}> (en blanco se mantienen)");
+            Console.WriteLine("RAM <{0} GB>: ");
+            Console.WriteLine("Disco duro < {0} GB>: ");
+            Console.WriteLine("Procesador < {0} >: ");
+            Console.WriteLine("Tarjeta Gráfica: ");
+            Console.WriteLine("Modifique las aplicaciones (separadas por comas) del <{0}> (en blanco se mantienen) <{1}>: ");
+
+            Console.Write("¿Más ordenadores (S/N)? ");
 
         }
 
