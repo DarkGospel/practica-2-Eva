@@ -247,30 +247,45 @@ namespace practica_2ªEva
                 Console.Clear();
                 int identificador;
                 Console.WriteLine(" === Borrar Aulas ===");
-                Console.WriteLine("¿Quieres borrar un aula(S/N)?: ");
-                respuesta = Console.ReadLine().ToUpper();
-                if(respuesta == "N") { break; }
+                
                 Console.Write("Identificador (0 ver lista de aulas): ");
                 identificador = int.Parse(Console.ReadLine());
                 if (identificador == 0)
                 {
                     veraula();
                 }
-                
+                if (veriID(identificador) == false && identificador != 0)
+                {
+                    Console.Write("¡El identificador no existe!");
+                    Console.ReadKey();
+                }
+
                 for (int i=0; i < NumAulas.Count; i++)
                 {
-                    if (veriID(identificador) == false && identificador != 0)
+                    for (int u = 0; u < NumOrd.Count; u++)
                     {
-                        Console.Write("¡El identificador no existe!");
-                        Console.ReadKey();
-                        
-                    }else
-                    if (identificador == NumAulas[i].Pid)
-                    {
-                        NumAulas.RemoveAt(i);
+                        if (identificador == NumAulas[i].Pid)
+                        {
+                            string respuesta2;
+                            Console.WriteLine("Se procedera a borrar el aula: {0}", NumAulas[i].PnomA);
+                            Console.WriteLine("¿desea continuar borrando el aula (S/N)?  ");
+                            respuesta2 = Console.ReadLine().ToUpper();
+                            if (respuesta2 == "S")
+                            {
+                                Console.WriteLine(".........{0} borrada", NumAulas[i].PnomA);
+                                NumAulas.RemoveAt(i);
+                            }
+                            else
+                            {
+                                Console.WriteLine(".............. No se ha borrado el aula");
+                            }
+                        }
                     }
                 }
-                
+                Console.WriteLine("¿Quieres borrar un aula(S/N)?: ");
+                respuesta = Console.ReadLine().ToUpper();
+                if (respuesta == "N") { break; }
+
             } while (respuesta != "N");
             
         }
@@ -346,8 +361,7 @@ namespace practica_2ªEva
                     cambiarUO();
                     break;
                 case "5":
-                    /*Configuración()*/
-                    ;
+                    modificarO();
                     break;
                 case "0":
                     menu();
@@ -494,9 +508,10 @@ namespace practica_2ªEva
                     if (identificador == NumOrd[i].PidO)
                     {
                         string cont;
-                        
-                        for (int u = 0; u < NumAulas.Count; u++) {
-                            if(NumOrd[i].PidA == NumAulas[u].Pid)
+
+                        for (int u = 0; u < NumAulas.Count; u++)
+                        {
+                            if (NumOrd[i].PidA == NumAulas[u].Pid)
                             {
                                 cont = NumAulas[u].PnomA;
                                 Console.WriteLine("Seleccionado {0} situado en <{1}>", NumOrd[i].PidO, cont);
@@ -515,15 +530,11 @@ namespace practica_2ªEva
                                 if (veriID(idaula) == true && idaula != 0)
                                 {
                                     NumOrd[i].PidA = idaula;
-                                    cont = NumAulas[u].PnomA;
+                                    cont = NumAulas[idaula - 1].PnomA;
                                     Console.WriteLine(".... El ordenador {0} se ha movido correctamente al <{1}>", NumOrd[i].PidO, cont);
                                 }
-
                             }
-                            
                         }
-                        
-                        
                     }
                 }
                 Console.Write("¿Mover más (S/N)? ");
@@ -531,6 +542,7 @@ namespace practica_2ªEva
                 if (respuesta == "N") { break; }
             } while (respuesta != "N");
         }
+        static void modificarO() { }
 
         /*busquedas*/
         static void busquedas(){ }
@@ -557,18 +569,12 @@ namespace practica_2ªEva
             switch (n)
             {
                 case "1":
-                    aulas();
                     break;
                 case "2":
-                    /*ordenadores()*/
-                    ;
                     break;
                 case "3":
-                    /*busqueda()*/
-                    ;
                     break;
                 case "4":
-                    /*Listados()*/
                     break;
                 default:
                     break;
@@ -596,10 +602,8 @@ namespace practica_2ªEva
             switch (n)
             {
                 case "1":
-                    
                     break;
                 case "2":
-                    
                     break;
                 case "3":
                     pruebas();
@@ -628,17 +632,9 @@ namespace practica_2ªEva
                 NumOrd.Add(new Ordenador("PC 07", DateTime.Now, 3, 4, 500, "intel celeron", "Intel Graphics", "Ubuntu 14, Gedit, LibreOffice 5"));
                 NumOrd.Add(new Ordenador("PC 08", DateTime.Now, 3, 4, 500, "intel celeron", "Intel Graphics", "Ubuntu 14, Gedit, LibreOffice 5"));
 
-            /*NumAulas[1].agregarpc("PC02", "Intel i5", 8, "W7, Office 2010, Chrome");
-            NumAulas[3].agregarpc("PC03", "Intel i5", 8, "W7, Office 2010, Chrome");
-            NumAulas[4].agregarpc("PC04", "Intel i5", 8, "W7, Office 2010, Chrome");
-            NumAulas[2].agregarpc("PC05", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
-            NumAulas[2].agregarpc("PC05", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
-            NumAulas[2].agregarpc("PC06", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
-            NumAulas[2].agregarpc("PC07", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");
-            NumAulas[2].agregarpc("PC08", "Intel celeron", 4, "Ubuntu 14, Gedit, LibreOffice 5");*/
-
-
-
+            Console.WriteLine("Se han creado aulas y ordenadores correctamente.");
+            Console.ReadKey();
+            
         }
     }
 }
