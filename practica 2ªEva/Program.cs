@@ -493,29 +493,38 @@ namespace practica_2ªEva
                 {
                     if (identificador == NumOrd[i].PidO)
                     {
-                        string cont = "0";
+                        string cont;
                         
                         for (int u = 0; u < NumAulas.Count; u++) {
                             if(NumOrd[i].PidA == NumAulas[u].Pid)
                             {
                                 cont = NumAulas[u].PnomA;
                                 Console.WriteLine("Seleccionado {0} situado en <{1}>", NumOrd[i].PidO, cont);
+
+                                Console.Write("Seleccione nueva ubicación (0 lista aulas): ");
+                                idaula = int.Parse(Console.ReadLine());
+                                if (idaula == 0)
+                                {
+                                    veraula();
+                                }
+                                if (veriID(idaula) == false && idaula != 0)
+                                {
+                                    Console.Write("¡El aula no existe!");
+                                    Console.ReadKey();
+                                }
+                                if (veriID(idaula) == true && idaula != 0)
+                                {
+                                    NumOrd[i].PidA = idaula;
+                                    cont = NumAulas[u].PnomA;
+                                    Console.WriteLine(".... El ordenador {0} se ha movido correctamente al <{1}>", NumOrd[i].PidO, cont);
+                                }
+
                             }
                             
                         }
                         
-                        Console.Write("Seleccione nueva ubicación (0 lista aulas): ");
-                        idaula = int.Parse(Console.ReadLine());
-                        if (idaula == 0)
-                        {
-                            veraula();
-                        }
-                        if (veriID(idaula) == false && idaula != 0)
-                        {
-                            Console.Write("¡El aula no existe!");
-                            Console.ReadKey();
-                        }
-                        }
+                        
+                    }
                 }
                 Console.Write("¿Mover más (S/N)? ");
                 respuesta = Console.ReadLine().ToUpper();

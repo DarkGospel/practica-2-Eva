@@ -16,3 +16,9 @@ F:\PROG\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\obj
 F:\PROG\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\bin\Debug\practica 2ªEva.exe
 F:\PROG\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\bin\Debug\practica 2ªEva.pdb
 F:\PROG\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\obj\Debug\practica 2ªEva.csprojResolveAssemblyReference.cache
+E:\PROG\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\bin\Debug\practica 2ªEva.exe.config
+E:\PROG\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\obj\Debug\practica 2ªEva.exe
+E:\PROG\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\obj\Debug\practica 2ªEva.pdb
+E:\PROG\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\bin\Debug\practica 2ªEva.exe
+E:\PROG\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\bin\Debug\practica 2ªEva.pdb
+E:\PROG\2ªEvaluación\Practica 2ºTrimestre\practica 2ªEva\practica 2ªEva\obj\Debug\practica 2ªEva.csprojResolveAssemblyReference.cache
