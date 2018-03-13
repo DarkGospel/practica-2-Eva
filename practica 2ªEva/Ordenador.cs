@@ -79,5 +79,60 @@ namespace practica_2ªEva
                 modificadorOrd = value;
             }
         }
+        public float PRAM
+        {
+            get
+            {
+                return ram;
+            }
+            set
+            {
+                ram = value;
+            }
+        }
+        public float PHDD
+        {
+            get
+            {
+                return hdd;
+            }
+            set
+            {
+                hdd = value;
+            }
+        }
+        public string PCPU
+        {
+            get
+            {
+                return procesador;
+            }
+            set
+            {
+                procesador = value;
+            }
+        }
+        public string PGPU
+        {
+            get
+            {
+                return tarjetagraf;
+            }
+            set
+            {
+                tarjetagraf = value;
+            }
+        }
+        public string PAPLI
+        {
+            get
+            {
+                return aplicaciones;
+            }
+            set
+            {
+                aplicaciones = value;
+            }
+        }
     }
 }

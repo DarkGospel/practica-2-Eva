@@ -12,7 +12,7 @@ namespace practica_2ªEva
         Autor: Juan Manuel Silva Cerrejón
         Fecha creación: 14/02/2018
         Última modificación: 05/03/2018
-        Versión: 0.52
+        Versión: 0.7
         ***********************************/
         /// <summary>
         /// MODIFICACIONES DE PROGRAM.CS
@@ -242,7 +242,7 @@ namespace practica_2ªEva
         }
         static void borraraula()
         {
-            int cont = 0;
+            
             do
             {
                 Console.Clear();
@@ -260,6 +260,7 @@ namespace practica_2ªEva
                     Console.Write("¡El identificador no existe!");
                     Console.ReadKey();
                 }
+                int cont = 0;
                 for (int u = 0; u < NumOrd.Count; u++)
                 {
                     if(identificador== NumOrd[u].PidA)
@@ -396,7 +397,6 @@ namespace practica_2ªEva
             }
             return false;
         }
-
         static void verordenador()
         {
             Console.Clear();
@@ -590,19 +590,72 @@ namespace practica_2ªEva
         }
         static void modificarO()
         {
-            Console.WriteLine("====== MODIFICAR ORDENADOR =======");
-            Console.WriteLine("Identificador de ordenador (0 ver lista ordenadores): ");
-            Console.WriteLine("¿Desea modificar su identificador (S/N)? ");
-            Console.WriteLine("El ordenador se encuentra en el aula con ID <{0}>");
-            Console.WriteLine("Modifique las características  del <{0}> (en blanco se mantienen)");
-            Console.WriteLine("RAM <{0} GB>: ");
-            Console.WriteLine("Disco duro < {0} GB>: ");
-            Console.WriteLine("Procesador < {0} >: ");
-            Console.WriteLine("Tarjeta Gráfica: ");
-            Console.WriteLine("Modifique las aplicaciones (separadas por comas) del <{0}> (en blanco se mantienen) <{1}>: ");
-
-            Console.Write("¿Más ordenadores (S/N)? ");
-
+            Console.Clear();
+            string identificador, respuesta2, nuevoID, nuevaApli, nuevaCpu, nuevaGpu;
+            float nuevaRam, nuevoDisco;
+            do
+            {
+                Console.WriteLine("====== MODIFICAR ORDENADOR =======");
+                Console.WriteLine("Identificador de ordenador (0 ver lista ordenadores): ");
+                identificador = Console.ReadLine().ToUpper();
+                if (identificador == "0")
+                {
+                    verordenador();
+                }
+                if (veriNom2(identificador) == false && identificador != "0")
+                {
+                    Console.Write("¡El identificador no existe!");
+                    Console.ReadKey();
+                }
+                Console.WriteLine("¿Desea modificar su identificador (S/N)? ");
+                respuesta2 = Console.ReadLine().ToUpper();
+                for (int i = 0; i < NumOrd.Count; i++)
+                {
+                    if (identificador == NumOrd[i].PidO)
+                    {
+                        if (respuesta2 == "S")
+                        {
+                            Console.Write("Introduce el nuevo identificador: ");
+                            nuevoID = Console.ReadLine().ToUpper();
+                            NumOrd[i].PidO = nuevoID;
+                            NumOrd[i].UmodO = DateTime.Now;
+                        }
+                        else
+                        if (respuesta2 == "N")
+                        {
+                            Console.WriteLine("El ordenador se encuentra en el aula con ID <{0}>", NumOrd[i].PidA);
+                            Console.Write("Modifique las características  del <{0}> (en blanco se mantienen)", NumOrd[i].PidO);
+                            Console.Write("\nRAM <{0} GB>: ", NumOrd[i].PRAM);
+                            nuevaRam = float.Parse(Console.ReadLine().ToString());
+                            NumOrd[i].PRAM = nuevaRam;
+                            Console.Write("\nDisco duro < {0} GB>: ", NumOrd[i].PHDD);
+                            nuevoDisco = float.Parse(Console.ReadLine());
+                            NumOrd[i].PHDD = nuevoDisco;
+                            Console.Write("\nProcesador < {0} >: ", NumOrd[i].PCPU);
+                            nuevaCpu = Console.ReadLine();
+                            if(nuevaCpu != string.Empty)
+                            {
+                                NumOrd[i].PCPU = nuevaCpu;
+                            }
+                            Console.Write("\nTarjeta Gráfica: ", NumOrd[i].PGPU);
+                            nuevaGpu = Console.ReadLine();
+                            if (nuevaGpu != string.Empty)
+                            {
+                                NumOrd[i].PGPU = nuevaGpu;
+                            }
+                            Console.WriteLine("\nModifique las aplicaciones (separadas por comas) del <{0}> (en blanco se mantienen) <{1}>: ", NumOrd[i].PidO, NumOrd[i].PAPLI);
+                            nuevaApli = Console.ReadLine();
+                            if (nuevaApli != string.Empty)
+                            {
+                                NumOrd[i].PAPLI = nuevaApli;
+                            }
+                            NumOrd[i].UmodO = DateTime.Now;
+                        }
+                    }
+                }
+                Console.Write("¿Más ordenadores (S/N)? ");
+                respuesta = Console.ReadLine().ToUpper();
+            } while (respuesta != "N");
         }
 
         /*busquedas*/
@@ -625,25 +678,93 @@ namespace practica_2ªEva
 
                 Console.Write(" Elegir opción: ");
                 n = Console.ReadLine();
-            } while (n != "0" && n != "1" && n != "2" && n != "3" && n != "4");
+            
 
             switch (n)
             {
                 case "1":
+                    nordAula();
                     break;
                 case "2":
+                    listordAula();
                     break;
                 case "3":
+                    listApli();
                     break;
                 case "4":
+                    caracOrd();
                     break;
                 default:
                     break;
             }
+            } while (n != "0");
         }
         /*Funciones listados*/
-
-
+        static void nordAula()
+        {
+            
+            Console.WriteLine("=== LISTA DE AULAS ordenadas ===");
+            Console.WriteLine("Id.              Nombre              NºOrdenadores");
+            Console.WriteLine("=====           =============        ===============");
+            for (int i = 0; i < NumAulas.Count; i++)
+            {
+                int cont = 0;
+                for (int u = 0; u < NumOrd.Count; u++)
+                {
+                    if(NumAulas[i].Pid == NumOrd[u].PidA)
+                    {
+                        cont++;
+                    }
+                }
+                Console.WriteLine("{0}\t\t{1}\t\t\t{2}", NumAulas[i].Pid, NumAulas[i].PnomA, cont);
+            }
+            Console.ReadKey();
+        }
+        static void listordAula()
+        {
+            Console.Clear();
+            Console.WriteLine("             === LISTADO DE ORDENADORES ORDENADOS POR AULA E IDENT. ===");
+            Console.WriteLine("Id.            Aula                  Aplicaciones");
+            Console.WriteLine("=======        =========             =================================");
+            for (int i = 0; i < NumAulas.Count; i++)
+            {
+                for (int u = 0; u < NumOrd.Count; u++)
+                {
+                    Console.WriteLine("{0}\t\t{1}\t\t\t{2}", NumOrd[u].PidO, NumAulas[i].PnomA, NumOrd[u].PAPLI);
+                }
+            }
+            Console.WriteLine("======================================================================");
+            Console.Write("Nº Ordenadores: {0}", NumOrd.Count);
+            Console.ReadKey();
+        }
+        static void listApli()
+        {
+            Console.Clear();
+            Console.WriteLine("=== APLICACIONES INSTALADAS POR ORDENADOR ===");
+            Console.WriteLine("Id.     Aplicaciones");
+            Console.WriteLine("====    ========================================");
+            for (int i = 0; i < NumOrd.Count; i++)
+            {
+                Console.WriteLine("{0}      {1}", NumOrd[i].PidO, NumOrd[i].PAPLI);
+            }
+            Console.WriteLine("=================================================");
+            Console.WriteLine("Nº Ordenadores: {0}", NumOrd.Count);
+            Console.ReadKey();
+        }
+        static void caracOrd()
+        {
+            Console.Clear();
+            Console.WriteLine("=== CARACTERÍSTICAS POR ORDENADOR ===");
+            Console.WriteLine("Id.      RAM          Disco D.       T. Gráf     Proces.     Alta/Mod.");
+            Console.WriteLine("=====    ==========   ==========     ========    ========    =========");
+            for (int i = 0; i < NumOrd.Count; i++)
+            {
+                Console.WriteLine("{0}      {1}          {2}           {3}          {4}         {5}", NumOrd[i].PidO, NumOrd[i].PRAM, NumOrd[i].PHDD, NumOrd[i].PGPU, NumOrd[i].PCPU, NumOrd[i].UmodO);
+            }
+            Console.WriteLine("======================================================================");
+            Console.WriteLine("Nº Ordenadores: {0}", NumOrd.Count);
+            Console.ReadLine();
+        }
         /*configuracion*/
         static void configuracion()
         {
@@ -659,10 +780,10 @@ namespace practica_2ªEva
                 Console.Write(" Elegir opción: ");
                 n = Console.ReadLine();
             
-
             switch (n)
             {
                 case "1":
+                    maxaulas();
                     break;
                 case "2":
                     break;
@@ -678,6 +799,24 @@ namespace practica_2ªEva
             } while (n != "0");
         }
         /*Funciones configuracion*/
+        static void maxaulas()
+        {
+            int max;
+            string respuesta2;
+            Console.WriteLine("Valor maximo de aulas por defecto 5");
+            max = 5;
+            Console.WriteLine("¿Quieres cambiar el valor (S/N)?");
+            respuesta2 = Console.ReadLine().ToUpper();
+            if (respuesta2 == "S")
+            {
+                Console.Write("Nuevo valor maximo de aulas: ");
+                max = int.Parse(Console.ReadLine());
+            }
+            else { }
+            Console.ReadKey();
+            
+        }
+       
         static void pruebas()
         {
             Console.Clear();
