@@ -48,7 +48,6 @@ namespace practica_2ªEva
         {
             menu();
         }
-
         static void menu()
         {
             do
@@ -86,7 +85,6 @@ namespace practica_2ªEva
             }
             } while (n != "0");
         }
-
         static void aulas()
         {
             do
@@ -186,8 +184,14 @@ namespace practica_2ªEva
                 Aula datoaula = new Aula();
                 Console.WriteLine(" === Añadir Aulas ===");
                 Console.Write("Identificador (0 ver lista de aulas): ");
-               
-                    aula = int.Parse(Console.ReadLine());
+                    if (NumAulas.Count >= max)
+                    {
+                        Console.WriteLine("¡Error! Número maximo de aulas introducido");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                aula = int.Parse(Console.ReadLine());
                     if (aula == 0)
                     {
                         veraula();
@@ -227,10 +231,12 @@ namespace practica_2ªEva
                 //Continuamos con la funcion
                 modificacion = DateTime.Now;
 
+                
+
                 //datos introducidos en lista y objeto
                 datoaula.LeerAulas(aula, nomaula, modificacion);                
                 NumAulas.Add(datoaula);
-
+                
                 Console.Write("¿más aulas(S/N)?: ");
                 respuesta = Console.ReadLine().ToUpper();
                 if(respuesta == "N")
@@ -430,7 +436,12 @@ namespace practica_2ªEva
                 {
                     verordenador();
                 }
-                
+                if(NumOrd.Count >= maxord)
+                {
+                    Console.WriteLine("¡ERROR! Máximo de ordenadores introducidos");
+                    Console.ReadKey();
+                    break;
+                }
                 /*Comprobación de identificadores repetidos*/
 
                 //CORRECTA
@@ -694,6 +705,9 @@ namespace practica_2ªEva
                 case "4":
                     caracOrd();
                     break;
+                case "0":
+                    menu();
+                    break;
                 default:
                     break;
             }
@@ -702,26 +716,36 @@ namespace practica_2ªEva
         /*Funciones listados*/
         static void nordAula()
         {
-            
+            int n = 0;
+            Console.Clear();
             Console.WriteLine("=== LISTA DE AULAS ordenadas ===");
             Console.WriteLine("Id.              Nombre              NºOrdenadores");
             Console.WriteLine("=====           =============        ===============");
-            for (int i = 0; i < NumAulas.Count; i++)
+            for (int i=0; i < NumAulas.Count; i++)
             {
+                n++;
                 int cont = 0;
                 for (int u = 0; u < NumOrd.Count; u++)
                 {
-                    if(NumAulas[i].Pid == NumOrd[u].PidA)
+                    if (NumAulas[i].Pid == NumOrd[u].PidA)
                     {
                         cont++;
                     }
                 }
                 Console.WriteLine("{0}\t\t{1}\t\t\t{2}", NumAulas[i].Pid, NumAulas[i].PnomA, cont);
+                if (n == 8)
+                {
+                    Console.ReadKey();
+                    Console.Clear();
+                    n = 0;
+                }
+                
             }
             Console.ReadKey();
         }
         static void listordAula()
         {
+            int n = 0;
             Console.Clear();
             Console.WriteLine("             === LISTADO DE ORDENADORES ORDENADOS POR AULA E IDENT. ===");
             Console.WriteLine("Id.            Aula                  Aplicaciones");
@@ -731,6 +755,14 @@ namespace practica_2ªEva
                 for (int u = 0; u < NumOrd.Count; u++)
                 {
                     Console.WriteLine("{0}\t\t{1}\t\t\t{2}", NumOrd[u].PidO, NumAulas[i].PnomA, NumOrd[u].PAPLI);
+                    
+                    if (n == 8)
+                    {
+                        Console.ReadKey();
+                        Console.Clear();
+                        n = 0;
+                    }
+                   
                 }
             }
             Console.WriteLine("======================================================================");
@@ -765,6 +797,7 @@ namespace practica_2ªEva
             Console.WriteLine("Nº Ordenadores: {0}", NumOrd.Count);
             Console.ReadLine();
         }
+
         /*configuracion*/
         static void configuracion()
         {
@@ -786,6 +819,7 @@ namespace practica_2ªEva
                     maxaulas();
                     break;
                 case "2":
+                    Maxord();
                     break;
                 case "3":
                     pruebas();
@@ -799,12 +833,12 @@ namespace practica_2ªEva
             } while (n != "0");
         }
         /*Funciones configuracion*/
-        static void maxaulas()
+        static int max = 5;
+        static int maxord = 15;
+        static int maxaulas()
         {
-            int max;
             string respuesta2;
-            Console.WriteLine("Valor maximo de aulas por defecto 5");
-            max = 5;
+            Console.WriteLine("Valor maximo de aulas por defecto {0}", max);
             Console.WriteLine("¿Quieres cambiar el valor (S/N)?");
             respuesta2 = Console.ReadLine().ToUpper();
             if (respuesta2 == "S")
@@ -814,9 +848,23 @@ namespace practica_2ªEva
             }
             else { }
             Console.ReadKey();
-            
+            return max;
         }
-       
+        static int Maxord()
+        {
+            string respuesta2;
+            Console.WriteLine("Valor maximo de ordenadores en aulas por defecto {0}", maxord);
+            Console.WriteLine("¿Quieres cambiar el valor (S/N)?");
+            respuesta2 = Console.ReadLine().ToUpper();
+            if (respuesta2 == "S")
+            {
+                Console.Write("Nuevo valor maximo de aulas: ");
+                maxord = int.Parse(Console.ReadLine());
+            }
+            else { }
+            Console.ReadKey();
+            return maxord;
+        }
         static void pruebas()
         {
             Console.Clear();
