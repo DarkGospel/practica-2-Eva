@@ -41,8 +41,10 @@ namespace practica_2ªEva
         /*****************************************************************/
         static string n, respuesta;
         static Aula datoaula = new Aula();
-        public static List<Aula> NumAulas = new List<Aula>();
-        public static List<Ordenador> NumOrd = new List<Ordenador>();
+        static List<Aula> NumAulas = new List<Aula>();
+        static List<Ordenador> NumOrd = new List<Ordenador>();
+        static List<Aula> Aula_Ord = new List<Aula>();
+        static List<Ordenador> Ordenador_Ord = new List<Ordenador>();
         /*****************************************************************/
         static void Main()
         {
@@ -721,7 +723,8 @@ namespace practica_2ªEva
             Console.WriteLine("=== LISTA DE AULAS ordenadas ===");
             Console.WriteLine("Id.              Nombre              NºOrdenadores");
             Console.WriteLine("=====           =============        ===============");
-            for (int i=0; i < NumAulas.Count; i++)
+            Aula_Ord = NumAulas.OrderBy(Aula => Aula.PnomA).ToList();
+            for (int i=0; i < Aula_Ord.Count; i++)
             {
                 n++;
                 int cont = 0;
@@ -732,9 +735,11 @@ namespace practica_2ªEva
                         cont++;
                     }
                 }
-                Console.WriteLine("{0}\t\t{1}\t\t\t{2}", NumAulas[i].Pid, NumAulas[i].PnomA, cont);
-                if (n == 8)
+                Console.WriteLine("{0}\t\t{1}\t\t\t{2}", Aula_Ord[i].Pid, Aula_Ord[i].PnomA, cont);
+                n++;
+                if (n == 8 && Aula_Ord.Count > 8)
                 {
+                    Console.WriteLine("Pulsa para continuar");
                     Console.ReadKey();
                     Console.Clear();
                     n = 0;
@@ -750,17 +755,24 @@ namespace practica_2ªEva
             Console.WriteLine("             === LISTADO DE ORDENADORES ORDENADOS POR AULA E IDENT. ===");
             Console.WriteLine("Id.            Aula                  Aplicaciones");
             Console.WriteLine("=======        =========             =================================");
-            for (int i = 0; i < NumAulas.Count; i++)
+            Aula_Ord = NumAulas.OrderBy(Aula => Aula.PnomA).ToList();
+            Ordenador_Ord = NumOrd.OrderBy(Ordenador => Ordenador.PidO).ToList(); 
+            for (int i = 0; i < Aula_Ord.Count; i++)
             {
-                for (int u = 0; u < NumOrd.Count; u++)
+                for (int u = 0; u < Ordenador_Ord.Count; u++)
                 {
-                    Console.WriteLine("{0}\t\t{1}\t\t\t{2}", NumOrd[u].PidO, NumAulas[i].PnomA, NumOrd[u].PAPLI);
-                    
-                    if (n == 8)
+                    if (Aula_Ord[i].Pid == Ordenador_Ord[u].PidA)
                     {
-                        Console.ReadKey();
-                        Console.Clear();
-                        n = 0;
+                        Console.WriteLine("{0}\t\t{1}\t\t\t{2}", NumOrd[u].PidO, NumAulas[i].PnomA, NumOrd[u].PAPLI);
+                        n++;
+                        if (n == 8 && NumOrd.Count > 8)
+                        {
+                            Console.WriteLine("Pulsa para continuar");
+                            Console.ReadKey();
+                            Console.Clear();
+                            n = 0;
+                        }
+                        
                     }
                    
                 }
@@ -771,13 +783,23 @@ namespace practica_2ªEva
         }
         static void listApli()
         {
+            int n = 0;
             Console.Clear();
             Console.WriteLine("=== APLICACIONES INSTALADAS POR ORDENADOR ===");
             Console.WriteLine("Id.     Aplicaciones");
             Console.WriteLine("====    ========================================");
-            for (int i = 0; i < NumOrd.Count; i++)
+            Ordenador_Ord = NumOrd.OrderBy(Ordenador => Ordenador.PidO).ToList();
+            for (int i = 0; i < Ordenador_Ord.Count; i++)
             {
                 Console.WriteLine("{0}      {1}", NumOrd[i].PidO, NumOrd[i].PAPLI);
+                n++;
+                if (n == 8 && NumOrd.Count > 8)
+                {
+                    Console.WriteLine("Pulsa para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
+                    n = 0;
+                }
             }
             Console.WriteLine("=================================================");
             Console.WriteLine("Nº Ordenadores: {0}", NumOrd.Count);
@@ -785,15 +807,24 @@ namespace practica_2ªEva
         }
         static void caracOrd()
         {
+            int n = 0;
             Console.Clear();
             Console.WriteLine("=== CARACTERÍSTICAS POR ORDENADOR ===");
-            Console.WriteLine("Id.      RAM          Disco D.       T. Gráf     Proces.     Alta/Mod.");
-            Console.WriteLine("=====    ==========   ==========     ========    ========    =========");
+            Console.WriteLine("Id.      RAM          Disco D.       T. Gráf     \t\tProces.     \tAlta/Mod.");
+            Console.WriteLine("=====    ==========   ==========     ========    \t\t========    \t=========");
             for (int i = 0; i < NumOrd.Count; i++)
             {
                 Console.WriteLine("{0}      {1}          {2}           {3}          {4}         {5}", NumOrd[i].PidO, NumOrd[i].PRAM, NumOrd[i].PHDD, NumOrd[i].PGPU, NumOrd[i].PCPU, NumOrd[i].UmodO);
+                n++;
+                if (n == 8 && NumOrd.Count > 8)
+                {
+                    Console.WriteLine("Pulsa para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
+                    n = 0;
+                }
             }
-            Console.WriteLine("======================================================================");
+            Console.WriteLine("===============================================================================================================");
             Console.WriteLine("Nº Ordenadores: {0}", NumOrd.Count);
             Console.ReadLine();
         }
